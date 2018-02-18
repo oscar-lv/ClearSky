@@ -11,11 +11,12 @@
         <li> Locality : {{address.country}} </li>
         <li> Latitude : {{Math.floor(address.latitude)}} </li>
         <li> Longitude : {{Math.floor(address.longitude)}}</li>
-        <li> CO2 Emissions : {{emission}} </li>
+        <li> Air Pollution : {{emission}} </li>
         <li> Noise Pollution : {{noise}} </li>
         <li> Number of Planes : {{planes}} </li>
         <li>{{post}}</li>
         <li>Weather : {{weather}} </li>
+        <li> Air pollution is scaled accordingly to the BAQI scale, 100 being the cleanest and 0 the poorest. </li>
       </ul>
     </div>
   </div>
@@ -69,6 +70,9 @@ export default {
       var vm = this;
       var lat = Math.floor(this.address.latitude);
       var lon = Math.floor(this.address.longitude);
+      this.emission = Math.floor(Math.random() * 20) + 50  ;
+      this.noise = Math.floor(Math.random() * 10) + 60 + ' db' ;
+      this.planes = Math.floor(Math.random() * 10) + 5;
       /*
       Axios request which fetches Weather api data and plugs it in
       */
@@ -82,30 +86,17 @@ export default {
       /*
       Fetch function which should fetch from Clear Sky API
       */
-      parameter => {
-        let body = '';
+      axios.post('http://51.254.212.72/api/search/', {
+        lat: "12.4",
+        lng: "12.3"
+       })
+       .then(function(res) {
+         console.log('Response from the back-end service:');
 
-        let data = {
-          "lat": "Your lat",
-          "lng": "Your lng",
-        };
-
-        Object.keys(data).map(function(e) {
-          body += e + "=" + data[e] + "&";
-        });
-
-        fetch('http://51.254.212.72/api/search/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: body,
-          }).then(resp => resp.json())
-          .then(data => {
-            console.log('test')
-            alert("test");
-          }).fail;
-      }
+       })
+       .catch(function (err) {
+         console.log('Error on the request to the back-end service: ' + err);
+       });
     },
 },
 }
