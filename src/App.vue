@@ -70,9 +70,9 @@ export default {
       var vm = this;
       var lat = Math.floor(this.address.latitude);
       var lon = Math.floor(this.address.longitude);
-      this.emission = Math.floor(Math.random() * 20) + 50  ;
-      this.noise = Math.floor(Math.random() * 10) + 60 + ' db' ;
-      this.planes = Math.floor(Math.random() * 10) + 5;
+      this.emission = //call API ;
+      this.noise = //call API ;
+      this.planes = //call API;
       /*
       Axios request which fetches Weather api data and plugs it in
       */
