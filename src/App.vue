@@ -78,7 +78,7 @@ export default {
       */
       axios.get('http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&units=metric&APPID=de28e63e4d471d4e3f193fa39d400c31')
         .then(function(response) {
-          vm.weather = (_.startCase(response.data.weather[0].description) + ', ' + (response.data.main.temp) + '°C');
+          this.weather = (_.startCase(response.data.weather[0].description) + ', ' + (response.data.main.temp) + '°C');
         })
         .catch(function(error) {
           console.log(error);
